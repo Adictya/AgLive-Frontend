@@ -1,11 +1,12 @@
-import { AgoraVideoPlayer} from "agora-rtc-react";
+import { AgoraVideoPlayer, createScreenVideoTrack } from "agora-rtc-react";
 
+const useScreenTrack = createScreenVideoTrack();
 
 const AgoraGameContainer = (props) => {
-  const tracks = props.tracks
+  const { ready, tracks } = useScreenTrack();
 
   return (
-    <AgoraVideoPlayer className="AgoraVideoPlayer" videoTrack={tracks} style={{height: '100%', width: '100%'}}/>
+    ready && <AgoraVideoPlayer className="AgoraVideoPlayer" videoTrack={tracks} style={{height: '100%', width: '100%'}}/>
   )
 }
 
