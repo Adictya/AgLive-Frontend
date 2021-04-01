@@ -11,9 +11,17 @@ const appId = ''
 
 const useClient = createClient(config)
 
-const StreamView = () => {
+const StreamView = (props) => {
   const client = useClient()
+  const cname = props.channelName | "defaultStream"
+  const uname = props.channelName | "default"
   useEffect(()=>client.setClientRole('host'),[])
+  useEffect(() => {
+    let init = async (name) => {
+      console.log("init",name);
+      await client.join(appId,name,null,uname)
+    }
+  })
   return (
     <>
       <div className={classes.streamContainer}>
