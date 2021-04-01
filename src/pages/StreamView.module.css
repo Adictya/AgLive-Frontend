@@ -1,0 +1,30 @@
+.streamContainer {
+  margin: 20px;
+  color: white;
+  width: 34rem;
+  height: 370px;
+  background-color: #23314a;
+  border-radius: 10px;
+}
+
+.streamHeader {
+  background-color: #3f495e;
+  height: 1rem;
+  padding: 1rem;
+  border-radius: 10px 10px 0 0;
+}
+
+.Gamestream {
+  margin: 10px;
+  height: 300px;
+}
+
+.Userstream {
+  border: 3px solid #215486;
+  position: absolute;
+  right: 20px;
+  top: 190px;
+  z-index: 10;
+  height: 100px;
+  width: 150px;
+}
