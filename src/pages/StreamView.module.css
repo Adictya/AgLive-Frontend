@@ -28,3 +28,33 @@
   height: 100px;
   width: 150px;
 }
+
+.startButton {
+  background-color: #3f495d;
+  height: 2.2rem;
+  padding: 0.6rem;
+  border-radius: 0.4rem;
+  border: none;
+  color: black;
+  font-weight: bold;
+  background-color: #00ba88;
+}
+
+.endButton {
+  height: 2.2rem;
+  padding: 0.6rem;
+  border-radius: 0.4rem;
+  border: none;
+  color: black;
+  font-weight: bold;
+  background-color: #f87171;
+}
+
+.mediaButton {
+  height: 2.2rem;
+  width: 2.2rem;
+  padding: 0.6rem;
+  border-radius: 20px;
+  border: none;
+  background-color: #3f495d;
+}
