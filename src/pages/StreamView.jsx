@@ -42,13 +42,13 @@ const StreamView = (props) => {
         <div className={classes.streamHeader}>
           <strong>Stream Activity</strong>
         </div>
-        <div style={{ position: "relative" }}>
+        <div className={classes.streams}>
           <div className={classes.Userstream}>
             <AgoraPlayerContainer ready={readyC} tracks={tracksC} />
           </div>
-        </div>
-        <div className={classes.Gamestream}>
-          <AgoraGameContainer ready={readyS} tracks={tracksS} />
+          <div className={classes.Gamestream}>
+            <AgoraGameContainer ready={readyS} tracks={tracksS} />
+          </div>
         </div>
       </div>
       <div className={classes.streamContainer} style={{ height: "10rem" }}>
