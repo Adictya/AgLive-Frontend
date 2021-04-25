@@ -1,12 +1,17 @@
-import {Route, Switch} from 'react-router-dom'
-import StreamView from './pages/StreamView'
-
+import { Route, Switch } from "react-router-dom";
+import StreamView from "./pages/StreamView";
+import NavBar from "./components/NavBar.jsx";
 
 function App() {
   return (
-    <Switch>
-      <Route path='/viewStream' component={StreamView} />
-    </Switch>
+    <div className="rootFlex">
+      <NavBar />
+      <div className="rootContainer">
+        <Switch>
+          <Route path="/viewStream" component={StreamView} />
+        </Switch>
+      </div>
+    </div>
   );
 }
 

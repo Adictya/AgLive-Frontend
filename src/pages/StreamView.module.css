@@ -1,16 +1,75 @@
 :root {
   --accent: #3f495e;
   --input: #39536b;
+  --accent-blue: #1da1f3;
+}
+
+.streamFlex {
+  display: flex;
+  flex-direction: row;
+}
+
+.streamsLeft {
+  width: 60%;
+  min-width: 20rem;
+  min-height: 10rem;
 }
 
 .streamContainer {
   margin: 1rem;
   color: white;
-  width: 60%;
-  min-width: 20rem;
-  min-height: 10rem;
   background-color: #23314a;
   border-radius: 10px;
+}
+
+.chatContainer {
+  margin-left: 0rem;
+  flex: 2;
+}
+
+.chatContent {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 3rem);
+}
+
+.chats {
+  flex: 2;
+  align-self: stretch;
+}
+
+.chatSend {
+  height: 6rem;
+  display: flex;
+  padding: 0.5rem;
+}
+
+.chatSend button {
+  width: 6rem;
+  padding: 0.6rem;
+  height: 2.2rem;
+  align-self: center;
+  border-radius: 0.4rem;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  background-color: var(--accent-blue);
+}
+
+.chatSend textarea {
+  flex: 2;
+  align-self: stretch;
+  font-weight: bold;
+  padding-top: 0.5rem;
+  border: none;
+  border-radius: 0.4rem;
+  padding-inline-start: 0.3rem;
+  margin-right: 0.5rem;
+  color: white;
+  background-color: var(--input);
+  outline: none;
+  resize: none;
 }
 
 .streams {
@@ -113,6 +172,12 @@
   cursor: pointer;
 }
 @media (max-width: 64em) {
+  .streamFlex {
+    flex-direction: column;
+  }
+  .streamsLeft {
+    width: auto;
+  }
   .streamContainer {
     width: auto;
     margin-inline: 1rem;

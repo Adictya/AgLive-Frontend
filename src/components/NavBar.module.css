@@ -1,0 +1,21 @@
+.NavBar {
+  width: 5.5rem;
+  height: 100vh;
+  background-color: #142037;
+}
+
+.NavItem {
+  height: 7rem;
+  padding: 1rem;
+  text-decoration: none;
+  outline: none;
+}
+
+.NavIcon {
+  padding-inline: 1rem;
+}
+
+.NavName {
+  text-align: center;
+  color: white;
+}
