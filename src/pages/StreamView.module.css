@@ -1,7 +1,14 @@
+:root {
+  --accent: #3f495e;
+  --input: #39536b;
+}
+
 .streamContainer {
   margin: 1rem;
   color: white;
-  width: 40%;
+  width: 60%;
+  min-width: 20rem;
+  min-height: 10rem;
   background-color: #23314a;
   border-radius: 10px;
 }
@@ -18,38 +25,80 @@
 }
 
 .Gamestream {
-  height: 50vh;
+  height: 68vh;
 }
 
 .Userstream {
-  /* border: 3px solid #215486; */
+  border: 3px solid #215486;
   position: absolute;
-  top: 0;
-  right: 0;
+  bottom: 20px;
+  right: 20px;
   z-index: 10;
-  /* background-color: #fff; */
-  /* height: 100%; */
-  /* width: 100%; */
+  height: 25%;
+  width: 25%;
 }
 
-.startButton {
-  background-color: #3f495d;
+.controlsContainer {
+  padding: 1rem;
+  display: flex;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.inputContainer {
+  flex: 1;
+  display: block;
+  padding-top: 0.7rem;
+  padding-right: 1rem;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.inputBox {
+  width: 100%;
   height: 2.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.4rem;
+  padding-inline-start: 0.3rem;
+  margin-top: 0.7rem;
+  margin-right: 2rem;
+  margin-right: 2rem;
+  color: white;
+  background-color: var(--input);
+  outline: none;
+}
+
+.mediaButton:first-child {
+  margin-inline-end: 0.5rem;
+}
+
+.mediaButton:nth-child(3) {
+  margin-inline-start: 0.5rem;
+}
+.mediaButton:nth-child(2) {
+  margin-inline: 0.5rem;
+}
+
+.button {
   padding: 0.6rem;
+  height: 2.2rem;
+  width: 100%;
   border-radius: 0.4rem;
   border: none;
   color: black;
   font-weight: bold;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.startButton {
   background-color: #00ba88;
 }
 
 .endButton {
-  height: 2.2rem;
-  padding: 0.6rem;
-  border-radius: 0.4rem;
-  border: none;
-  color: black;
-  font-weight: bold;
   background-color: #f87171;
 }
 
@@ -60,4 +109,20 @@
   border-radius: 20px;
   border: none;
   background-color: #3f495d;
+  outline: none;
+  cursor: pointer;
+}
+@media (max-width: 64em) {
+  .streamContainer {
+    width: auto;
+    margin-inline: 1rem;
+  }
+  .Userstream {
+    max-width: 18rem;
+  }
+}
+@media (max-width: 43em) {
+  .Userstream {
+    max-width: 8rem;
+  }
 }
