@@ -7,8 +7,9 @@ import {
   createClient,
 } from "agora-rtc-react";
 import { useEffect, useState } from "react";
-
+import {useMutation} from "react-query";
 const config = { mode: "live", codec: "vp8" };
+
 const appId = "1e6816ded05149088f32daa1c0d19456";
 
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
@@ -16,28 +17,76 @@ const useScreenTrack = createScreenVideoTrack({}, "auto");
 
 const useClient = createClient(config);
 
-const StreamView = (props) => {
-  const [cname, setcname] = useState();
+const baseUrl = "http://localhost:8080/"
+
+const StreamView = () => {
+  let stream = {};
+  const  mutateStream  = useMutation(stream => {
+    fetch(`${baseUrl}createStream`,{
+      "method":"POST",
+      "headers":{
+        "content-type":"application/json",
+        "accept":"application/json",
+        "Access-Control-Allow-Origin":"*"
+      },
+      "body": JSON.stringify(stream)
+    }).then(response => response.json())
+      .then(response =>{console.log(response)})
+      .catch(err => console.log(err) )
+  })
+  const [cname, setcname] = useState("");
   const client = useClient();
-  const uname = props.userName ? props.userName : "defaultUser";
   const [streaming, setStreaming] = useState(false);
-  const { ready: readyC, tracks: tracksC } = useMicrophoneAndCameraTracks();
-  const { ready: readyS, tracks: tracksS } = useScreenTrack();
+
+  const { ready: readyC, tracks: tracksC } = useMicrophoneAndCameraTracks()
+  const { ready: readyS, tracks: tracksS } = useScreenTrack()
   const [trackState, setTrackState] = useState({
     video: true,
     audio: true,
     screen: true,
   });
 
+  const createThumbnail = async () => {
+    var video = document.getElementsByClassName("agora_video_player")[1];
+    var canvas = document.createElement("canvas");
+    canvas.width = 128;
+    canvas.height = 72;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    video = document.getElementsByClassName("agora_video_player")[0];
+    ctx.drawImage(
+      video,
+      (canvas.width / 4) * 3,
+      (canvas.height / 3) * 2,
+      canvas.width / 3,
+      canvas.height / 3
+    );
+    stream.Thumbnail = canvas.toDataURL("image/jpeg");
+    console.log(stream.Thumbnail);
+  };
+
   let init = async (name) => {
     console.log("init", name);
-    await client.join(appId, name, null, uname);
+    await client.join(appId, name, null, null);
     setStreaming(true);
   };
 
   const join = () => {
-    if (readyC && tracksC && readyS && tracksS)
-      init(cname ? cname : "defaultStream");
+    if(cname === "") {
+      const newName  = "defaultStream" + Math.floor(Math.random() * 101)
+      setcname(newName)
+      console.log(cname)
+    }
+
+    if (readyC && tracksC && readyS && tracksS) {
+      init(cname).then(()=>{
+        createThumbnail();
+        stream.Channel = cname;
+        mutateStream.mutate(stream)
+      }).catch(err => {
+        setStreaming(false)
+        setcname(cname+ Math.floor(Math.random() * 101))});
+    }
   };
 
   let leave = async () => {
@@ -86,7 +135,7 @@ const StreamView = (props) => {
               </div>
             </div>
           </div>
-          <div className={classes.streamContainer}>
+          <div className={ `${classes.streamContainer} ${classes.controlsRoot}` }>
             <div className={classes.streamHeader}>
               <strong>Streaming Details</strong>
             </div>
@@ -180,7 +229,7 @@ const StreamView = (props) => {
           <div className={classes.chatContent}>
             <div className={classes.chats}>I am chats</div>
             <div className={classes.chatSend}>
-              <textarea  placeholder="Say something!" />
+              <textarea placeholder="Say something!" />
               <button>Send</button>
             </div>
           </div>

@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./NavBar.module.css";
 
-const redirector = (active) => {
-  if (active) {
-  }
-};
-
 const NavBar = (props) => {
   const [active, setActive] = useState(true);
 
