@@ -83,6 +83,10 @@
   resize: none;
 }
 
+.chatSend::-webkit-scrollbar {
+  width: 2px;
+}
+
 .streams {
   padding: 0.75rem;
   flex: 2;

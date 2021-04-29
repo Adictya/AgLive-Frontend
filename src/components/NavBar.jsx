@@ -8,7 +8,7 @@ const NavBar = (props) => {
   return (
     <div className={classes.NavBar}>
       <NavLink
-        to="/home"
+        to="/"
         className={classes.NavItem}
         isActive={(match) => {
           if (!match) {
@@ -36,7 +36,7 @@ const NavBar = (props) => {
         <div className={classes.NavName}>Home</div>
       </NavLink>
       <NavLink
-        to="/viewStream"
+        to="/stream"
         className={classes.NavItem}
         isActive={(match) => {
           if (!match) {

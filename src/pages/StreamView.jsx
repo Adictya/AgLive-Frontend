@@ -7,7 +7,7 @@ import {
   createClient,
 } from "agora-rtc-react";
 import { useEffect, useState } from "react";
-import {useMutation} from "react-query";
+import { useMutation } from "react-query";
 const config = { mode: "live", codec: "vp8" };
 
 const appId = "1e6816ded05149088f32daa1c0d19456";
@@ -17,29 +17,32 @@ const useScreenTrack = createScreenVideoTrack({}, "auto");
 
 const useClient = createClient(config);
 
-const baseUrl = "http://localhost:8080/"
+const baseUrl = "http://localhost:8080/";
 
 const StreamView = () => {
   let stream = {};
-  const  mutateStream  = useMutation(stream => {
-    fetch(`${baseUrl}createStream`,{
-      "method":"POST",
-      "headers":{
-        "content-type":"application/json",
-        "accept":"application/json",
-        "Access-Control-Allow-Origin":"*"
+  const mutateStream = useMutation((stream) => {
+    fetch(`${baseUrl}createStream`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accept: "application/json",
+        // "Access-Control-Allow-Origin":"*"
       },
-      "body": JSON.stringify(stream)
-    }).then(response => response.json())
-      .then(response =>{console.log(response)})
-      .catch(err => console.log(err) )
-  })
-  const [cname, setcname] = useState("");
+      body: JSON.stringify(stream),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
+  });
+  const [cname, setCname] = useState("defaultStream");
   const client = useClient();
   const [streaming, setStreaming] = useState(false);
 
-  const { ready: readyC, tracks: tracksC } = useMicrophoneAndCameraTracks()
-  const { ready: readyS, tracks: tracksS } = useScreenTrack()
+  const { ready: readyC, tracks: tracksC } = useMicrophoneAndCameraTracks();
+  const { ready: readyS, tracks: tracksS } = useScreenTrack();
   const [trackState, setTrackState] = useState({
     video: true,
     audio: true,
@@ -71,21 +74,26 @@ const StreamView = () => {
     setStreaming(true);
   };
 
-  const join = () => {
-    if(cname === "") {
-      const newName  = "defaultStream" + Math.floor(Math.random() * 101)
-      setcname(newName)
-      console.log(cname)
+  const join = async () => {
+    let newName;
+    if (cname === "") {
+      newName = "DefaultStream" + Math.floor(Math.random() * 101);
+      setCname(newName);
+    } else {
+      newName = cname;
     }
 
     if (readyC && tracksC && readyS && tracksS) {
-      init(cname).then(()=>{
-        createThumbnail();
-        stream.Channel = cname;
-        mutateStream.mutate(stream)
-      }).catch(err => {
-        setStreaming(false)
-        setcname(cname+ Math.floor(Math.random() * 101))});
+      init(newName)
+        .then(() => {
+          createThumbnail();
+          stream.Channel = newName;
+          mutateStream.mutate(stream);
+        })
+        .catch((err) => {
+          setStreaming(false);
+          console.log(err);
+        });
     }
   };
 
@@ -135,7 +143,7 @@ const StreamView = () => {
               </div>
             </div>
           </div>
-          <div className={ `${classes.streamContainer} ${classes.controlsRoot}` }>
+          <div className={`${classes.streamContainer} ${classes.controlsRoot}`}>
             <div className={classes.streamHeader}>
               <strong>Streaming Details</strong>
             </div>
@@ -148,7 +156,7 @@ const StreamView = () => {
                   placeholder="defaultStream"
                   id="channelName"
                   value={cname}
-                  onChange={(e) => setcname(e.target.value)}
+                  onChange={(e) => setCname(e.target.value)}
                   className={classes.inputBox}
                 />
               </div>

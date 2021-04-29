@@ -22,3 +22,11 @@ code {
 .rootContainer {
   flex: 2;
 }
+
+textarea::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: #1da1f3;
+}
