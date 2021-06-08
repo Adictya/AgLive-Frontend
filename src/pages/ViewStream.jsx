@@ -1,6 +1,6 @@
 import React from "react";
-import AgoraPlayerContainer from "components/AgoraPlayerContainer";
-import AgoraGameContainer from "components/AgoraGameContainer";
+import WebCamFeed from "components/WebCamFeed";
+import ScreenStreamFeed from "components/ScreenStreamFeed";
 import classes from "./StreamView.module.css";
 
 const ViewStream = (props) => {
