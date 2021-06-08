@@ -1,8 +1,9 @@
 import classes from "./StreamView.module.css";
 import WebCamFeed from "components/WebCamFeed";
 import ScreenStreamFeed from "components/ScreenStreamFeed";
-import StreamControls from "components/StreamControls"
+import StreamControls from "components/StreamControls";
 import Chat from "components/Chat";
+import Modal from "components/Modal";
 import {
   createMicrophoneAndCameraTracks,
   createScreenVideoTrack,
@@ -118,7 +119,7 @@ const StreamView = () => {
     if (streaming) {
       await client.leave();
       setStreaming(false);
-      deleteStream.mutate({Channel:stream.Channel})
+      deleteStream.mutate({ Channel: stream.Channel });
     }
   };
 
@@ -148,10 +149,7 @@ const StreamView = () => {
     <>
       <div className={classes.streamFlex}>
         <div className={classes.streamsLeft}>
-          <div className={classes.streamContainer}>
-            <div className={classes.streamHeader}>
-              <strong>Stream Activity</strong>
-            </div>
+          <Modal heading="Stream Activity">
             <div className={classes.streams}>
               <div className={classes.Userstream}>
                 <WebCamFeed ready={readyC} tracks={tracksC} />
@@ -160,15 +158,21 @@ const StreamView = () => {
                 <ScreenStreamFeed ready={readyS} tracks={tracksS} />
               </div>
             </div>
-          </div>
-          <StreamControls cname={cname} setCname={setCname} trackState={trackState}
-                          mute={mute} streaming={streaming} join={join} leave={leave}/>
+          </Modal>
+          <StreamControls
+            cname={cname}
+            setCname={setCname}
+            trackState={trackState}
+            mute={mute}
+            streaming={streaming}
+            join={join}
+            leave={leave}
+          />
         </div>
-        <Chat/>
+        <Chat />
       </div>
     </>
   );
 };
 
 export default StreamView;
-

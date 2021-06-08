@@ -1,0 +1,22 @@
+.streamContainer {
+  color: white;
+  flex: 2;
+  background-color: #23314a;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.streamHeader {
+  background-color: #3f495e;
+  height: 1rem;
+  padding: 1rem;
+  border-radius: 10px 10px 0 0;
+}
+
+@media (max-width: 64em) {
+  .streamContainer {
+    width: auto;
+    margin-inline: 1rem;
+  }
+}
