@@ -19,9 +19,9 @@ const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeM
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const paths = require("./paths");
-const modules = require("./modules");
-const getClientEnvironment = require("./env");
+const paths = require("./config/paths");
+const modules = require("./config/modules");
+const getClientEnvironment = require("./config/env");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
 const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpackPlugin");
 const typescriptFormatter = require("react-dev-utils/typescriptFormatter");
@@ -325,7 +325,6 @@ module.exports = function (webpackEnv) {
         .filter((ext) => useTypeScript || !ext.includes("ts")),
       alias: {
         // Support React Native Web
-        // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         "react-native": "react-native-web",
         // Allows for better profiling with ReactDevTools
         ...(isEnvProductionProfile && {

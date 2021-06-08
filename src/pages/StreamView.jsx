@@ -1,6 +1,6 @@
 import classes from "./StreamView.module.css";
-import AgoraPlayerContainer from "../components/AgoraPlayerContainer";
-import AgoraGameContainer from "../components/AgoraGameContainer";
+import AgoraPlayerContainer from "components/AgoraPlayerContainer";
+import AgoraGameContainer from "components/AgoraGameContainer";
 import {
   createMicrophoneAndCameraTracks,
   createScreenVideoTrack,
