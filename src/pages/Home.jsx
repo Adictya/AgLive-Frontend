@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import classes from "./Home.module.css";
 
@@ -35,7 +35,7 @@ const fetchVideos = async () => {
   return res.json();
 };
 
-const Home = (props) => {
+const Home = () => {
   const { data, status } = useQuery("vidoes", fetchVideos);
   console.log(data);
 
@@ -48,11 +48,13 @@ const Home = (props) => {
       {status === "success" &&
         data.map((stream) => {
           return (
+            <>
             <VideoElement
-              name={stream.channel}
-              streamId={stream.id}
-              key={stream.channel + stream.id}
+            name={stream.channel}
+            streamId={stream.id}
+            key={stream.channel + stream.id}
             />
+            </>
           );
         })}
     </div>

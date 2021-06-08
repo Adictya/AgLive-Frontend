@@ -17,7 +17,7 @@ const useScreenTrack = createScreenVideoTrack({}, "auto");
 
 const useClient = createClient(config);
 
-const baseUrl = "http://localhost:8080/";
+const baseUrl = "http://localhost:8000/";
 
 const StreamView = () => {
   let stream = {};
@@ -37,7 +37,22 @@ const StreamView = () => {
       })
       .catch((err) => console.log(err));
   });
-  const [cname, setCname] = useState("defaultStream");
+  const deleteStream = useMutation((stream) => {
+    fetch(`${baseUrl}deleteStream`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify(stream),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
+  });
+  const [cname, setCname] = useState("");
   const client = useClient();
   const [streaming, setStreaming] = useState(false);
 
@@ -101,6 +116,7 @@ const StreamView = () => {
     if (streaming) {
       await client.leave();
       setStreaming(false);
+      deleteStream.mutate({Channel:stream.Channel})
     }
   };
 
