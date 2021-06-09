@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 const config = { mode: "live", codec: "vp8" };
 
-const appId = "1e6816ded05149088f32daa1c0d19456";
+const appId = "*****************************";
 
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 const useScreenTrack = createScreenVideoTrack({}, "auto");

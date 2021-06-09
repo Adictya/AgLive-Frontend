@@ -43,6 +43,7 @@ const Home = () => {
           return (
             <>
               <VideoElement
+                baseUrl={baseUrl}
                 name={stream.channel}
                 streamId={stream.id}
                 key={stream.channel + stream.id}
@@ -55,21 +56,25 @@ const Home = () => {
           (
             <>
             <VideoElement
+            baseUrl={baseUrl}
             name="Test Stream 1"
             streamId={21}
             key={1}
             />
             <VideoElement
+            baseUrl={baseUrl}
             name="Test Stream 2"
             streamId={22}
             key={2}
             />
             <VideoElement
+            baseUrl={baseUrl}
             name="Test Stream 3"
             streamId={23}
             key={3}
             />
             <VideoElement
+            baseUrl={baseUrl}
             name="Test Stream 4"
             streamId={24}
             key={4}
